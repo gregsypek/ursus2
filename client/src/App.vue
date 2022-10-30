@@ -82,10 +82,18 @@ aside div {
 aside h3 {
   position: relative;
   top: 50%;
-  transform: rotate(270deg);
+  
+   transform: rotate(0);
   font-weight: bold;
   font-size: 4rem;
   letter-spacing: 6px;
+}
+@media screen and (min-width: 1264px) {
+  aside h3 {
+transform: rotate(270deg);
+ 
+
+}
 }
 /* footer */
 footer a.nav-link:hover,

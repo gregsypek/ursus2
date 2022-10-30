@@ -2,7 +2,7 @@
   	<!-- navbar -->
 		<nav class="navbar navbar-expand-lg p-0" style="background-color: var(--color-light-500)">
 			<div class="container">
-				<router-link to="/" class="navbar-brand btn-logo my-2"><img src="../../src/assets/logo-ursus.png" alt=""></router-link>
+				<router-link to="/" class="navbar-brand btn-logo my-2"><img src="../../src/assets/logo-ursus.png" alt="logo"></router-link>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
 					<span class="navbar-toggler-icon"></span>
 				</button>

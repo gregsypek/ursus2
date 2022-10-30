@@ -1,6 +1,17 @@
 <template>
 	<!-- main -->
 	<section class="my-5">
+		<v-container>
+			<v-alert
+				close-text="Close Alert"
+				color="green accent-4"
+				green
+				dismissible
+				v-if="this.$route.params.message"
+			>
+				{{ this.$route.params.message }}
+			</v-alert>
+		</v-container>
 		<div class="container">
 			<div class="d-flex row justify-content-center g-5">
 				<aside class="d-none d-lg-block col-3">
@@ -50,3 +61,9 @@ export default {
 	},
 };
 </script>
+<style scoped>
+.v-sheet.v-alert:not(.v-sheet--outlined) {
+	background-color: #4caf50;
+	color: white;
+}
+</style>
