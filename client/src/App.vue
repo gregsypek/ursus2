@@ -50,7 +50,43 @@ body {
 .btn-register:active {
   background-color: var(--color-light-400) !important;
 }
-
+/* card */
+a.card {
+  text-decoration: none;
+}
+h3.card-title {
+  color: var(--color-dark-500);
+}
+.card-text {
+  color: var(--color-dark-400);
+}
+.card-img-top {
+  height: 134px;
+  min-width: 220px;
+  width: auto;
+  background-color: var(--color-light-400);
+}
+.card-img-top {
+  object-fit: cover;
+  object-fit: contain;
+}
+/* h3.card-title {
+  color: var(--color-accent);
+} */
+aside div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-light-500);
+}
+aside h3 {
+  position: relative;
+  top: 50%;
+  transform: rotate(270deg);
+  font-weight: bold;
+  font-size: 4rem;
+  letter-spacing: 6px;
+}
 /* footer */
 footer a.nav-link:hover,
 footer a.nav-link:active {
