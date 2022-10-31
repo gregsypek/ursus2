@@ -20,7 +20,7 @@
 					</div>
 				</aside>
 				<main class="row col-12 col-lg-9 g-5">
-					<h1 class="mt-0">Title 1</h1>
+					<!-- <h1 class="mt-0">Title 1</h1> -->
 
 					<div class="col-md" v-for="(post, i) in posts" :key="post._id">
 						<router-link
