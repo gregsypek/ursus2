@@ -11,7 +11,7 @@
 								alt="logo"
 								class="d-none d-xxl-block"
 							/> -->           
-                 <v-img :src="`/${post.image}`" heigth="120" class="d-none d-xxl-block" ></v-img>
+                 <img :src="`/${post.image}`" width="100%" class="d-none d-xxl-block " ></img>
 						</h3>
 					</div>
 				</aside>
@@ -123,11 +123,10 @@ export default {
 .v-messages__message {
 	color: var(--color-accent);
 }
+
 aside h3 {
   transform:rotate(0);
 }
-.v-image__image {
-  z-index: 1 !important
-}
+
 
 </style>
