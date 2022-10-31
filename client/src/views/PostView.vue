@@ -31,7 +31,7 @@
                   <p class="btn btn-outline-secondary h4 m-0">{{post.price}} <span>zł</span></p>
                 </div>
                 <div class="buttons col-12 col-lg-4 d-flex gap-3 justify-content-start justify-content-lg-end">
-                  <button class="btn btn-light">edit</button>
+                  <v-btn :to="{name:'edit-post', params: {id: post._id}}" class="btn btn-light" >edit</v-btn>
                   <button class="btn btn-danger">delete</button>
                 </div>
               </div>
