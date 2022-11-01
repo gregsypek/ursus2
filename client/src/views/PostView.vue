@@ -57,7 +57,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-12 col-lg-4"></div>
+					<div class="col-12 d-flex flex-row-reverse">
+						<v-btn :to="{ name: 'home' }">&larr; back</v-btn>
+					</div>
 				</main>
 			</div>
 		</div>
