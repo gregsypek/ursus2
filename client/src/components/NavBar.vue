@@ -21,7 +21,7 @@
 					<div>
 
 						<button class="btn btn-login d-block d-lg-inline ">login</button>
-						<button class="btn btn-register  d-block  d-lg-inline">register</button>
+						<router-link to="/register" class="btn btn-register  d-block  d-lg-inline">register</router-link>
 					</div>
 				</div>
 			</div>
