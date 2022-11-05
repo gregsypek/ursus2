@@ -1,7 +1,6 @@
 import axios from "axios";
 // const url = "/api/v1/tractors";
 const url = "/api/post";
-const urlUser = "/api/post/register";
 export default class API {
 	//to get all the posts from the server
 	static async getAllPost() {
@@ -29,8 +28,9 @@ export default class API {
 		const res = await axios.delete(`${url}/${id}`);
 		return res.data;
 	}
+	//to create a user
 	static async createUser(credentials) {
-		const res = await axios.post(urlUser, credentials);
+		const res = await axios.post(`${url}/register`, credentials);
 		console.log(
 			"🚀 ~ file: api.js ~ line 34 ~ API ~ createUser ~ credentials",
 			credentials

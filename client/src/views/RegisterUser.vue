@@ -83,7 +83,12 @@ export default {
           password: this.password,
         })
         .then(() => {
-          this.$router.push({ name: "home" });
+          this.$router.push({
+            name: "home",
+            params: {
+              message: "Congratulations, you've just created your new account",
+            },
+          });
         });
     },
   },

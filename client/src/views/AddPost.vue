@@ -1,7 +1,7 @@
 <template>
 	<section class="my-5">
 		<div class="container">
-			<div class="d-flex row justify-content-center g-5">
+			<div class=" d-flex row justify-content-center g-5" >
 				<aside class="d-none d-lg-block col-3">
 					<div class="rounded">
 						<h3>
@@ -19,10 +19,17 @@
 					<div class="col-md">
 						<v-container>
 							<v-row no-gutters>
-								<v-col sm="10" class="mx-auto">
-									<v-card class="p-5 my-5">
+								<v-col sm="10" class="mx-auto ">
+									<template v-if="!isLoggedIn" >
+					
+										<h3 class="text-center" >Logged in to be able add post!</h3>
+
+					
+									</template>
+									<v-card v-else class="p-5 my-5">
 										<v-card-title>Add New Post</v-card-title>
 										<v-divider></v-divider>
+
 										<v-form
 											ref="form"
 											@submit.prevent="submitForm"
@@ -74,44 +81,53 @@
 <script>
 import API from "../api";
 export default {
-	data() {
-		return {
-			rules: [(value) => !!value || "This field is required!"],
-			post: {
-				name: "",
-				price: "",
-				info: "",
-				image: "",
-			},
-			image: "",
-			errorMessage: "",
-		};
-	},
-	methods: {
-		selectFile(file) {
-			console.log("🚀 ~ file: AddPost.vue ~ line 37 ~ selectFile ~ file", file);
-			this.image = file[0];
-		},
-		async submitForm() {
-			const formData = new FormData();
-			formData.append("image", this.image);
-			formData.append("name", this.post.name);
-			formData.append("price", this.post.price);
-			formData.append("info", this.post.info);
-			if (this.$refs.form.validate()) {
-				const response = await API.addPost(formData);
-				this.$router.push({
-					name: "home",
-					params: { message: response.message },
-				});
-			}
-		},
-	},
+  data() {
+    return {
+      rules: [(value) => !!value || "This field is required!"],
+      post: {
+        name: "",
+        price: "",
+        info: "",
+        image: "",
+      },
+      image: "",
+      errorMessage: "",
+    };
+  },
+  methods: {
+    selectFile(file) {
+      console.log("🚀 ~ file: AddPost.vue ~ line 37 ~ selectFile ~ file", file);
+      this.image = file[0];
+    },
+    async submitForm() {
+      const formData = new FormData();
+      formData.append("image", this.image);
+      formData.append("name", this.post.name);
+      formData.append("price", this.post.price);
+      formData.append("info", this.post.info);
+      if (this.$refs.form.validate()) {
+        const response = await API.addPost(formData);
+        this.$router.push({
+          name: "home",
+          params: { message: response.message },
+        });
+      }
+    },
+  },
+  computed: {
+    isLoggedIn() {
+      // return this.$store.state.user != null;
+      return localStorage.getItem("user") != null;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .v-messages__message {
-	color: var(--color-accent);
+  color: var(--color-accent);
+}
+.container {
+  min-height: 50vh;
 }
 </style>
