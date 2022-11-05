@@ -1,4 +1,7 @@
 const Post = require("../models/posts");
+const User = require("../models/users");
+const jwt = require("jsonwebtoken");
+
 const fs = require("fs");
 
 module.exports = class API {
@@ -12,7 +15,7 @@ module.exports = class API {
 		}
 	}
 	//fetch post by ID
-	static async fetchPostByID(req, res) {	
+	static async fetchPostByID(req, res) {
 		const id = req.params.id;
 		try {
 			const post = await Post.findById(id);
@@ -61,7 +64,7 @@ module.exports = class API {
 		}
 	}
 	//delete a post
-	static async deletePost(req, res) {	
+	static async deletePost(req, res) {
 		const id = req.params.id;
 		try {
 			const result = await Post.findByIdAndDelete(id);
@@ -75,6 +78,16 @@ module.exports = class API {
 			res.status(200).json({ message: "Post deleted sucessfully" });
 		} catch (err) {
 			res.status(404).json({ message: err.message });
+		}
+	}
+	//create user
+	static async createUser(req, res) {
+		const user = req.body;
+		try {
+			await User.create(user);
+			res.status(201).json({ message: "User created successfully!" });
+		} catch (err) {
+			res.status(400).json({ message: err.message });
 		}
 	}
 };

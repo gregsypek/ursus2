@@ -1,11 +1,12 @@
 import axios from "axios";
 // const url = "/api/v1/tractors";
-const url = "/api/post"
+const url = "/api/post";
+const urlUser = "/api/post/register";
 export default class API {
 	//to get all the posts from the server
 	static async getAllPost() {
 		const res = await axios.get(url);
-		console.log("🚀 ~ file: api.js ~ line 9 ~ API ~ getAllPost ~ res", res);
+		// console.log("🚀 ~ file: api.js ~ line 9 ~ API ~ getAllPost ~ res", res);
 		return res.data;
 	}
 	//to get single post by id
@@ -26,6 +27,15 @@ export default class API {
 	//to delete a post
 	static async deletePost(id) {
 		const res = await axios.delete(`${url}/${id}`);
+		return res.data;
+	}
+	static async createUser(credentials) {
+		const res = await axios.post(urlUser, credentials);
+		console.log(
+			"🚀 ~ file: api.js ~ line 34 ~ API ~ createUser ~ credentials",
+			credentials
+		);
+		console.log("🚀 ~ file: api.js ~ line 34 ~ API ~ createUser ~ res", res);
 		return res.data;
 	}
 }
