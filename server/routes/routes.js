@@ -33,8 +33,9 @@ function verifyToken(req, res, next) {
 
 router.get("/", API.fetchAllPost);
 router.get("/:id", API.fetchPostByID);
-router.post("/",  upload, API.createPost);
-router.post("/register", API.createUser)
+router.post("/", upload, API.createPost);
+router.post("/register", API.createUser);
+router.post("/login", API.loginUser);
 router.patch("/:id", upload, API.updatePost);
 router.delete("/:id", API.deletePost);
 

@@ -25,5 +25,16 @@ export default new Vuex.Store({
 			// console.log("data from store", data);
 			commit("SET_USER_DATA", data);
 		},
+		async login({ commit }, credentials) {
+			const data = await API.loginUser(credentials);
+			// console.log("data from store", data);
+			commit("SET_USER_DATA", data);
+		},
+	},
+	getters: {
+		loggedIn(state) {
+			return !!state.user;
+			// return !!localStorage.getItem("user");
+		},
 	},
 });

@@ -18,19 +18,24 @@
 							<router-link to="/about" class="nav-link p-3">About</router-link>
 						</li>			
 					</ul>
-					<div>
+					<div v-if="!loggedIn">
 
-						<button class="btn btn-login d-block d-lg-inline ">login</button>
+						<router-link to="/login" class="btn btn-login d-block d-lg-inline ">login</router-link>
 						<router-link to="/register" class="btn btn-register  d-block  d-lg-inline">register</router-link>
 					</div>
+					<div v-else> <button class="btn btn-login">Witaj ponownie</button></div>
 				</div>
 			</div>
 		</nav>
 </template>
 
 <script>
+import { authComputed } from "../vuex/helpers.js";
 export default {
   name: "NavBar",
+  computed: {
+    ...authComputed,
+  },
 };
 </script>
 

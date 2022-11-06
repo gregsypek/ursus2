@@ -105,4 +105,23 @@ module.exports = class API {
 			res.status(400).json({ message: err.message });
 		}
 	}
+
+	static async loginUser(req, res) {
+		// const userDB = fs.readFileSync("./db/user.json");
+		// const userInfo = JSON.parse(userDB);
+		const { email, password, name } = req.body;
+		const user = await User.findOne({ email });
+		console.log("🚀 ~ file: api.js ~ line 114 ~ API ~ loginUser ~ user", user);
+
+		if (req.body && email === user.email && password === user.password) {
+			const token = jwt.sign({ user }, "the_secret_key");
+			res.json({
+				token,
+				email,
+				name,
+			});
+		} else {
+			res.status(401).json({ message: "Please provide email and password!" });
+		}
+	}
 };

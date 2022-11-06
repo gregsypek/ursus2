@@ -5,6 +5,7 @@ import AddPost from "../views/AddPost.vue";
 import EditPost from "../views/EditPost.vue";
 import PostView from "../views/PostView.vue";
 import RegisterUser from "../views/RegisterUser.vue";
+import LoginUser from "../views/LoginUser.vue";
 
 Vue.use(VueRouter);
 
@@ -33,6 +34,11 @@ const routes = [
 		path: "/register",
 		name: "register",
 		component: RegisterUser,
+	},
+	{
+		path: "/login",
+		name: "login",
+		component: LoginUser,
 	},
 	{
 		path: "/about",

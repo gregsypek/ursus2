@@ -31,11 +31,15 @@ export default class API {
 	//to create a user
 	static async createUser(credentials) {
 		const res = await axios.post(`${url}/register`, credentials);
-		console.log(
-			"🚀 ~ file: api.js ~ line 34 ~ API ~ createUser ~ credentials",
-			credentials
-		);
+		// console.log(
+		// 	"🚀 ~ file: api.js ~ line 34 ~ API ~ createUser ~ credentials",
+		// 	credentials
+		// );
 		console.log("🚀 ~ file: api.js ~ line 34 ~ API ~ createUser ~ res", res);
+		return res.data;
+	}
+	static async loginUser(credentials) {
+		const res = await axios.post(`${url}/login`, credentials);
 		return res.data;
 	}
 }
