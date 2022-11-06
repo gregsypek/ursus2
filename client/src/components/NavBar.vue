@@ -24,7 +24,7 @@
 						<router-link to="/register" class="btn btn-register  d-block  d-lg-inline">register</router-link>
 					</div>
 					<div v-else> 
-						<p class="btn m-0">Witaj ponownie</p>
+						<p class="btn m-0">Witaj {{getUserName}}</p>
 						<button class="btn btn-login" type="button" @click="logout">Logout</button>
 					</div>
 				</div>
@@ -38,6 +38,11 @@ export default {
   name: "NavBar",
   computed: {
     ...authComputed,
+    getUserName() {
+      return this.$store.state.user.name
+        ? this.$store.state.user.name
+        : this.$store.state.user.email.split("@")[0];
+    },
   },
   methods: {
     logout() {

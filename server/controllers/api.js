@@ -92,6 +92,10 @@ module.exports = class API {
 					password: req.body.password,
 					// TODO encrypt the password in a live app
 				};
+				console.log(
+					"🚀 ~ file: api.js ~ line 95 ~ API ~ createUser ~ user?????",
+					user
+				);
 				const token = jwt.sign({ user }, "the_secret_key");
 
 				await User.create(user);
@@ -111,9 +115,12 @@ module.exports = class API {
 		// const userInfo = JSON.parse(userDB);
 		const { email, password, name } = req.body;
 		const user = await User.findOne({ email });
-		console.log("🚀 ~ file: api.js ~ line 114 ~ API ~ loginUser ~ user", user);
 
 		if (req.body && email === user.email && password === user.password) {
+			console.log(
+				"🚀 ~ file: api.js ~ line 114 ~ API ~ loginUser ~ user",
+				user
+			);
 			const token = jwt.sign({ user }, "the_secret_key");
 			res.json({
 				token,

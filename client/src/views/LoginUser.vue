@@ -79,7 +79,7 @@ export default {
           this.$router.push({
             name: "home",
             params: {
-              message: "Welcome back :)",
+              message: "You are logged in!",
             },
           });
         });
