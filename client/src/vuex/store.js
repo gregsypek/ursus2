@@ -18,6 +18,10 @@ export default new Vuex.Store({
 			] = `Bearer ${userData.token}`;
 			console.log("state.user", state.user);
 		},
+		CLEAR_USER_DATA() {
+			localStorage.removeItem("user");
+			location.reload();
+		},
 	},
 	actions: {
 		async register({ commit }, credentials) {
@@ -29,6 +33,9 @@ export default new Vuex.Store({
 			const data = await API.loginUser(credentials);
 			// console.log("data from store", data);
 			commit("SET_USER_DATA", data);
+		},
+		logout({ commit }) {
+			commit("CLEAR_USER_DATA");
 		},
 	},
 	getters: {

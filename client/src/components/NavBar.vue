@@ -12,7 +12,7 @@
 							<router-link to="/" class="nav-link active p-3">Home</router-link>
 						</li>
 						<li class="nav-item">
-							<router-link to="/add-post" class="nav-link p-3">Add post</router-link>
+							<router-link v-if="loggedIn" to="/add-post" class="nav-link p-3">Add post</router-link>
 						</li>
 						<li class="nav-item">
 							<router-link to="/about" class="nav-link p-3">About</router-link>
@@ -23,7 +23,10 @@
 						<router-link to="/login" class="btn btn-login d-block d-lg-inline ">login</router-link>
 						<router-link to="/register" class="btn btn-register  d-block  d-lg-inline">register</router-link>
 					</div>
-					<div v-else> <button class="btn btn-login">Witaj ponownie</button></div>
+					<div v-else> 
+						<p class="btn m-0">Witaj ponownie</p>
+						<button class="btn btn-login" type="button" @click="logout">Logout</button>
+					</div>
 				</div>
 			</div>
 		</nav>
@@ -35,6 +38,11 @@ export default {
   name: "NavBar",
   computed: {
     ...authComputed,
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
   },
 };
 </script>

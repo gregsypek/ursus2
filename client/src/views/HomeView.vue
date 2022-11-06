@@ -21,8 +21,10 @@
 				</aside>
 				<main class="row col-12 col-lg-9 gap-3 gap-lg-5">
 					<h1 class="mt-0">&nbsp;</h1>
-
-					<div class="col-md" v-for="(post, i) in posts" :key="post._id">
+					<template v-if="isLoading">
+						<h3 class="text-center">Loading...</h3>
+					</template>
+					<div v-else class="col-md" v-for="(post, i) in posts" :key="post._id">
 						<router-link
 							:to="{ name: 'post', params: { id: post._id } }"
 							class="card rounded-0 border-0"
@@ -50,20 +52,22 @@
 import API from "../api.js";
 
 export default {
-	name: "Home",
-	data() {
-		return {
-			posts: [],
-		};
-	},
-	async created() {
-		this.posts = await API.getAllPost();
-	},
+  name: "Home",
+  data() {
+    return {
+      isLoading: true,
+      posts: [],
+    };
+  },
+  async created() {
+    this.posts = await API.getAllPost();
+    this.isLoading = false;
+  },
 };
 </script>
 <style scoped>
 .v-sheet.v-alert:not(.v-sheet--outlined) {
-	background-color: #4caf50;
-	color: white;
+  background-color: #4caf50;
+  color: white;
 }
 </style>

@@ -20,13 +20,8 @@
 						<v-container>
 							<v-row no-gutters>
 								<v-col sm="10" class="mx-auto ">
-									<template v-if="!isLoggedIn" >
-					
-										<h3 class="text-center" >Logged in to be able add post!</h3>
-
-					
-									</template>
-									<v-card v-else class="p-5 my-5">
+							
+									<v-card  class="p-5 my-5">
 										<v-card-title>Add New Post</v-card-title>
 										<v-divider></v-divider>
 
