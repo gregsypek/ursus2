@@ -30,10 +30,6 @@ export default new Vuex.Store({
 			commit("SET_USER_DATA", data);
 		},
 		async login({ commit }, credentials) {
-			console.log(
-				"🚀 ~ file: store.js ~ line 33 ~ login ~ credentials!!!!!!!!!!!!!",
-				credentials
-			);
 			const data = await API.loginUser(credentials);
 			// console.log("data from store", data);
 			commit("SET_USER_DATA", data);
