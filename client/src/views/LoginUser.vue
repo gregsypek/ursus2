@@ -41,7 +41,8 @@
 												prepend-icon="mdi-note-plus"
 											></v-text-field>
 
-											<v-btn type="submit" class="mt-3">Login</v-btn>
+											<v-btn type="submit" class="mt-3">Login</v-btn>	
+											<p class="error">{{error}}</p>
                       <div class="isRegister my-5">
 
 											<router-link to="/register">
@@ -66,6 +67,7 @@ export default {
     return {
       email: "",
       password: "",
+      error: null,
     };
   },
   methods: {
@@ -82,6 +84,9 @@ export default {
               message: "You are logged in!",
             },
           });
+        })
+        .catch((err) => {
+          this.error = err.response.data.message;
         });
     },
   },
@@ -91,5 +96,8 @@ export default {
 <style>
 .isRegister a {
   color: var(--color-dark-500);
+}
+.error {
+  color: red;
 }
 </style>

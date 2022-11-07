@@ -47,6 +47,9 @@
 											></v-text-field>
 
 											<v-btn type="submit" class="mt-3">Register</v-btn>
+											<ul>
+												<li v-for="(error,index) in errors" :key="index" class="error">{{error}}</li>
+											</ul>
                       <div class="isRegister my-5">
 
 											<router-link to="/login">
@@ -72,6 +75,7 @@ export default {
       name: "",
       email: "",
       password: "",
+      errors: null,
     };
   },
   methods: {
@@ -89,6 +93,13 @@ export default {
               message: "Congratulations, you've just created your new account",
             },
           });
+        })
+        .catch((err) => {
+          // console.log(
+          //   "🚀 ~ file: RegisterUser.vue ~ line 98 ~ register ~ err",
+          //   err
+          // );
+          this.errors = err.response.data.errors;
         });
     },
   },

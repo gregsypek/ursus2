@@ -44,10 +44,10 @@ module.exports = class API {
 			new_image = req.file.filename;
 			try {
 				fs.unlinkSync("./uploads/" + req.body.old_image);
-				console.log(
-					"🚀 ~ file: api.js ~ line 46 ~ API ~ updatePost ~ req.body",
-					req.body
-				);
+				// console.log(
+				// 	"🚀 ~ file: api.js ~ line 46 ~ API ~ updatePost ~ req.body",
+				// 	req.body
+				// );
 			} catch (err) {
 				console.log(err);
 			}
@@ -82,22 +82,33 @@ module.exports = class API {
 	}
 	//create user
 	static async createUser(req, res) {
-		// const user = req.body;
-
 		try {
-			if (req.body) {
+			let errorsToSend = [];
+			const { email, password, name } = req.body;
+
+			if (!email || !password || !name) {
+				errorsToSend.push("Email,  password and name are required!");
+			}
+			const dbUserEmail = await User.findOne({ email });
+
+			if (dbUserEmail) {
+				errorsToSend.push("An account with this email already exists");
+			}
+			if (password.length < 6) {
+				errorsToSend.push("Password to short");
+			}
+			if (errorsToSend.length > 0) {
+				res.status(400).json({ errors: errorsToSend }); // send errors back with status code
+			} else {
 				const user = {
-					name: req.body.name,
-					email: req.body.email,
-					password: req.body.password,
+					name,
+					email,
+					password,
 					// TODO encrypt the password in a live app
 				};
-				console.log(
-					"🚀 ~ file: api.js ~ line 95 ~ API ~ createUser ~ user?????",
-					user
-				);
 				const token = jwt.sign({ user }, "the_secret_key");
 
+				console.log("user before create", user);
 				await User.create(user);
 				res.status(201).json({
 					token,
@@ -111,24 +122,33 @@ module.exports = class API {
 	}
 
 	static async loginUser(req, res) {
-		// const userDB = fs.readFileSync("./db/user.json");
-		// const userInfo = JSON.parse(userDB);
-		const { email, password, name } = req.body;
-		const user = await User.findOne({ email });
+		try {
+			const { email, password } = req.body;
+			if (!email || !password) {
+				return res
+					.status(401)
+					.json({ message: "Please provide email and password!" });
+			}
+			const user = await User.findOne({ email });
 
-		if (req.body && email === user.email && password === user.password) {
-			console.log(
-				"🚀 ~ file: api.js ~ line 114 ~ API ~ loginUser ~ user",
-				user
-			);
-			const token = jwt.sign({ user }, "the_secret_key");
-			res.json({
-				token,
-				email,
-				name,
-			});
-		} else {
-			res.status(401).json({ message: "Please provide email and password!" });
+			if (!user) {
+				return res
+					.status(401)
+					.json({ message: "Incorrect email or passwordd" });
+			}
+			if (user.email === email && user.password === password) {
+				const token = jwt.sign({ user }, "the_secret_key");
+				res.json({
+					token,
+					email,
+				});
+			} else {
+				return res
+					.status(401)
+					.json({ message: "Incorrect email or passwordd" });
+			}
+		} catch (err) {
+			res.status(400).json({ message: err.message });
 		}
 	}
 };
