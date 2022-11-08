@@ -14,7 +14,7 @@
 										<router-link class="nav-link" to="/">Home</router-link>
 									</li>
 									<li class="nav-item">
-										<router-link class="nav-link" to="/add-post">Add Post</router-link>
+										<router-link v-if="loggedIn" class="nav-link" to="/add-post">Add Post</router-link>
 									</li>
 									<li class="nav-item">
 										<router-link class="nav-link" to="/about">About</router-link>
@@ -24,11 +24,8 @@
 							<div class="col-lg">
 								<ul class="nav flex-column">
 									<li class="nav-item">
-										<a class="nav-link" href="https://www.ursus.com/pl">link</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="https://www.ursus.com/pl/aktualnosci">info-link</a>
-									</li>
+										<a class="nav-link" href="https://www.ursus.com/pl">www.ursus.com</a>
+									</li>					
 
 								</ul>
 							</div>
@@ -89,7 +86,13 @@
 </template>
 
 <script>
-export default {};
+import { authComputed } from "../vuex/helpers.js";
+
+export default {
+  computed: {
+    ...authComputed,
+  },
+};
 </script>
 
 <style>

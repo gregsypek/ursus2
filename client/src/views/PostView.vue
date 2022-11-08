@@ -33,6 +33,7 @@
 									</p>
 								</div>
 								<div
+								v-if="loggedIn"
 									class="buttons col-12 col-lg-4 d-flex gap-3 justify-content-start justify-content-lg-end"
 								>
 									<v-btn
@@ -58,7 +59,7 @@
 						</div>
 					</div>
 					<div class="col-12 d-flex flex-row-reverse">
-						<v-btn :to="{ name: 'home' }">&larr; back</v-btn>
+						<v-btn 	class="btn btn-light" :to="{ name: 'home' }">&larr; back</v-btn>
 					</div>
 				</main>
 			</div>
@@ -68,62 +69,70 @@
 
 <script>
 import API from "../api";
+import { authComputed } from "../vuex/helpers.js";
+
 export default {
-	data() {
-		return {
-			post: {},
-		};
-	},
-	async created() {
-		const response = await API.getPostByID(this.$route.params.id);
-		this.post = response;
-	},
+  data() {
+    return {
+      post: {},
+    };
+  },
+  async created() {
+    const response = await API.getPostByID(this.$route.params.id);
+    this.post = response;
+  },
   methods: {
-    async removePost(id){
+    async removePost(id) {
       const response = await API.deletePost(id);
-      this.$router.push({name: "home", params: {message: response.message}})
-    }
-  }
+      this.$router.push({
+        name: "home",
+        params: { message: response.message },
+      });
+    },
+  },
+  computed: {
+    ...authComputed,
+  },
 };
 </script>
 
 <style scoped>
 .thumbnails {
-	background-color: var(--color-light-500);
+  background-color: var(--color-light-500);
 }
 .img-thumbnail {
-	width: 100px;
+  width: 100px;
 }
 aside {
-	position: relative;
+  position: relative;
 }
 aside div {
-	background-color: var(--color-accent);
+  background-color: var(--color-accent);
 }
 aside h3 {
-	position: absolute;
-	letter-spacing: 0;
-	color: var(--color-white);
+  position: absolute;
+  letter-spacing: 0;
+  color: var(--color-white);
 
-	left: 50%;
-	top: 50%;
-	transform: rotate(0) translate(-50%, -50%);
-	width: max-content;
-	margin: 0;
-	padding: 0;
+  left: 50%;
+  top: 50%;
+  transform: rotate(0) translate(-50%, -50%);
+  width: max-content;
+  margin: 0;
+  padding: 0;
 }
 
 .btn-danger,
 .btn-danger:hover {
-	color: var(--color-accent);
+  color: var(--color-accent);
 }
 .btn-outline-secondary:hover {
-	color: var(--color-dark);
-	background-color: var(--color-white);
+  color: var(--color-dark);
+  background-color: var(--color-white);
 }
 @media (min-width: 800px) {
-	.img-thumbnail {
-		width: 200px;
-	}
+  .img-thumbnail {
+    width: 200px;
+  }
 }
 </style>

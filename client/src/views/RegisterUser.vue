@@ -47,7 +47,7 @@
 											></v-text-field>
 
 											<v-btn type="submit" class="mt-3">Register</v-btn>
-											<ul>
+											<ul class="errors">
 												<li v-for="(error,index) in errors" :key="index" class="error">{{error}}</li>
 											</ul>
                       <div class="isRegister my-5">
@@ -83,6 +83,7 @@ export default {
       this.$store
         .dispatch("register", {
           name: this.name,
+          // ma
           email: this.email,
           password: this.password,
         })

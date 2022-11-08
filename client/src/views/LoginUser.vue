@@ -42,7 +42,10 @@
 											></v-text-field>
 
 											<v-btn type="submit" class="mt-3">Login</v-btn>	
+											<div class="errors">
 											<p class="error">{{error}}</p>
+
+											</div>
                       <div class="isRegister my-5">
 
 											<router-link to="/register">
@@ -99,5 +102,8 @@ export default {
 }
 .error {
   color: red;
+}
+.errors {
+  margin-block: 2rem;
 }
 </style>

@@ -30,7 +30,7 @@ function verifyToken(req, res, next) {
 		jwt.verify(req.token, "the_secret_key", (err) => {
 			if (err) {
 				return res.sendStatus(401);
-			} else {		
+			} else {
 				next();
 			}
 		});
@@ -39,14 +39,12 @@ function verifyToken(req, res, next) {
 	}
 }
 
-
-
 router.get("/", API.fetchAllPost);
 router.get("/:id", API.fetchPostByID);
 router.post("/", verifyToken, upload, API.createPost);
 router.post("/register", API.createUser);
 router.post("/login", API.loginUser);
-router.patch("/:id", upload, API.updatePost);
-router.delete("/:id", API.deletePost);
+router.patch("/:id", verifyToken, upload, API.updatePost);
+router.delete("/:id", verifyToken, API.deletePost);
 
 module.exports = router;

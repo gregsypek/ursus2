@@ -22,9 +22,22 @@ new Vue({
 			(response) => response,
 			(error) => {
 				console.log(error.response);
-				if (error.response.status === 401) {
-					this.$router.push("/");
-					this.$store.dispatch("logout");
+				if (
+					(error.response.status === 401 && this.$route.name === "add-post") ||
+					this.$route.name === "edit-post" ||
+					this.$route.name === "post"
+				) {
+					// this.$router.push("/");
+					this.$router.push({
+						name: "home",
+						params: {
+							warning: "You are not authorized to perform this action!",
+						},
+					});
+					//to hide add-post page from navbar
+					setTimeout(() => {
+						this.$store.dispatch("logout");
+					}, 5000);
 				}
 				return Promise.reject(error);
 			}

@@ -3,6 +3,7 @@
 	<section class="my-5">
 		<v-container>
 			<v-alert
+			class="success"
 				close-text="Close Alert"
 				color="green accent-4"
 				green
@@ -11,6 +12,15 @@
 			>
 				{{ this.$route.params.message }}
 			</v-alert>
+			<v-alert
+			class="warning"
+				close-text="Close Alert"
+				color="red accent-4"
+				red
+				dismissible	
+				v-if="this.$route.params.warning"		
+			>{{ this.$route.params.warning }}	</v-alert>
+			<!-- You are not authorized to perform this action! -->
 		</v-container>
 		<div class="container">
 			<div class="d-flex row justify-content-center g-5">
@@ -66,8 +76,12 @@ export default {
 };
 </script>
 <style scoped>
-.v-sheet.v-alert:not(.v-sheet--outlined) {
+.success {
   background-color: #4caf50;
+  color: white;
+}
+.warning {
+  background-color: #f61b16;
   color: white;
 }
 </style>

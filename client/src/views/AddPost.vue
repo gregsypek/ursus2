@@ -118,11 +118,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<style >
 .v-messages__message {
-  color: var(--color-accent);
-}
-.container {
-  min-height: 50vh;
+  color: #f61b16;
 }
 </style>
