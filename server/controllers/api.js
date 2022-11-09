@@ -132,9 +132,7 @@ module.exports = class API {
 			const user = await User.findOne({ email });
 
 			if (!user) {
-				return res
-					.status(401)
-					.json({ message: "Incorrect email or passwordd" });
+				return res.status(401).json({ message: "Incorrect email or password" });
 			}
 			if (user.email === email && user.password === password) {
 				const token = jwt.sign({ user }, "the_secret_key");

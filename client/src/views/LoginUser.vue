@@ -37,9 +37,20 @@
 											></v-text-field>
 											<v-text-field
 												label="password"
+												:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+												
 												v-model="password"
+												:type="showPassword ? 'text' : 'password'"
+										
+												@click:append="showPassword = !showPassword"
 												prepend-icon="mdi-note-plus"
 											></v-text-field>
+											<!-- <v-text-field
+												label="password"
+												type="password"
+												v-model="password"
+												prepend-icon="mdi-note-plus"
+											></v-text-field> -->
 
 											<v-btn type="submit" class="mt-3">Login</v-btn>	
 											<div class="errors">
@@ -71,6 +82,7 @@ export default {
       email: "",
       password: "",
       error: null,
+      showPassword: false,
     };
   },
   methods: {

@@ -24,7 +24,8 @@
 										<v-card-title>Create new account</v-card-title>
 										<v-divider></v-divider>
 										<v-form
-											ref="form"
+											ref="registerForm"
+											v-model="formValidity"
 											@submit.prevent="register"
 											class="pa-5"
 											enctype="multipart/form-data"
@@ -32,30 +33,68 @@
 											<v-text-field
 												label="Name"
 												v-model="name"
+												:rules="nameRules"
+												required
 												prepend-icon="mdi-note"
 											></v-text-field>
 											<v-text-field
 												label="Email"
 												v-model="email"
+												:rules="emailRules"
 												type="email"
+												required
 												prepend-icon="mdi-view-list"
 											></v-text-field>
 											<v-text-field
 												label="password"
+												:append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+												:type="showPassword ? 'text' : 'password'"
+												:rules="passwordRules"
+												@click:append="showPassword = !showPassword"
+												required
+												counter
 												v-model="password"
 												prepend-icon="mdi-note-plus"
 											></v-text-field>
 
-											<v-btn type="submit" class="mt-3">Register</v-btn>
+											<v-btn
+												type="submit"
+												class="mt-3 me-3"
+												:disabled="!formValidity"
+												>Register</v-btn
+											>
+											<v-btn
+												class="mt-3 me-3"
+												color="success"
+												@click="validateForm"
+												>Validate Form</v-btn
+											>
+											<v-btn
+												color="warning"
+												class="mt-3 me-3 btn btn-validation mx-3"
+												@click="resetValidation"
+												>Reset Validation</v-btn
+											>
+											<v-btn
+												color="error"
+												class="mt-3 me-3 btn btn-reset"
+												@click="resetForm"
+												>Reset</v-btn
+											>
 											<ul class="errors">
-												<li v-for="(error,index) in errors" :key="index" class="error">{{error}}</li>
+												<li
+													v-for="(error, index) in errors"
+													:key="index"
+													class="error"
+												>
+													{{ error }}
+												</li>
 											</ul>
-                      <div class="isRegister my-5">
-
-											<router-link to="/login">
-												Already have an account? Login.
-											</router-link>
-                      </div>
+											<div class="isRegister my-5">
+												<router-link to="/login">
+													Already have an account? Login.
+												</router-link>
+											</div>
 										</v-form>
 									</v-card>
 								</v-col>
@@ -76,6 +115,26 @@ export default {
       email: "",
       password: "",
       errors: null,
+      showPassword: false,
+
+      emailRules: [
+        (value) => value.indexOf("@") !== 0 || "Email should have a username.",
+        (value) => value.includes("@") || "Email should include an @ symbol.",
+        (value) =>
+          value.indexOf(".") - value.indexOf("@") > 1 ||
+          "Email should contain a valid domain.",
+        (value) =>
+          value.includes(".") || "Email should include a period symbol.",
+        (value) =>
+          value.indexOf(".") <= value.length - 3 ||
+          "Email should contain a valid domain extension.",
+      ],
+      nameRules: [(value) => !!value || "Name is required"],
+      passwordRules: [
+        (value) => !!value || "Password is required",
+        (value) => value.length > 5 || "Minimum length is 6",
+      ],
+      formValidity: false,
     };
   },
   methods: {
@@ -96,19 +155,39 @@ export default {
           });
         })
         .catch((err) => {
-          // console.log(
-          //   "🚀 ~ file: RegisterUser.vue ~ line 98 ~ register ~ err",
-          //   err
-          // );
           this.errors = err.response.data.errors;
         });
+    },
+    resetValidation() {
+      this.$refs.registerForm.resetValidation();
+    },
+    resetForm() {
+      this.$refs.registerForm.reset();
+    },
+    validateForm() {
+      this.$refs.registerForm.validate();
     },
   },
 };
 </script>
 
 <style>
-.isRegister a {
+.v-icon {
+  margin-right: 1rem;
+}
+/* .isRegister a {
   color: var(--color-dark-500);
+} */
+button .btn {
+  color: black;
+}
+.v-btn:not(.v-btn--outlined).error {
+  color: red;
+}
+.v-btn:not(.v-btn--outlined).warning {
+  color: orange;
+}
+.v-btn:not(.v-btn--outlined).success {
+  color: green;
 }
 </style>
