@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="app" data-app>
 		<NavBar />
 		<router-view />
 		<Footer />
@@ -16,7 +16,6 @@ export default {
 </script>
 
 <style>
-
 /* colors */
 body {
   --color-light-400: #e5e9f1;

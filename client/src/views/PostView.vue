@@ -33,7 +33,7 @@
 									</p>
 								</div>
 								<div
-								v-if="loggedIn"
+									v-if="loggedIn"
 									class="buttons col-12 col-lg-4 d-flex gap-3 justify-content-start justify-content-lg-end"
 								>
 									<v-btn
@@ -41,7 +41,38 @@
 										class="btn btn-light"
 										>edit</v-btn
 									>
-									<v-btn @click="removePost(post._id)" class="btn btn-danger">delete</v-btn>
+									<!-- <v-btn @click="removePost(post._id)" class="btn btn-danger"
+										>delete</v-btn
+									> -->
+									<v-btn @click="dialog = true" class="btn btn-danger"
+										>delete</v-btn
+									>
+
+									<v-dialog v-model="dialog" persistent max-width="390">
+										<v-card>
+											<v-card-title class="text-h5 error headline">
+												Confirm Delete
+											</v-card-title>
+											<v-card-text
+												>Are you sure you want to delete?</v-card-text
+											>
+											<v-card-actions>
+												<v-spacer></v-spacer>
+												<v-btn
+													flat
+													color="green darken-1"
+													text
+													@click="dialog = false"
+													class="me-4"
+												>
+													Cancel
+												</v-btn>
+												<v-btn color="error" flat @click="removePost(post._id)">
+													Confirm Delete
+												</v-btn>
+											</v-card-actions>
+										</v-card>
+									</v-dialog>
 								</div>
 							</div>
 							<div
@@ -59,7 +90,9 @@
 						</div>
 					</div>
 					<div class="col-12 d-flex flex-row-reverse">
-						<v-btn 	class="btn btn-light" :to="{ name: 'home' }">&larr; back</v-btn>
+						<v-btn class="btn btn-light" :to="{ name: 'home' }"
+							>&larr; back</v-btn
+						>
 					</div>
 				</main>
 			</div>
@@ -75,6 +108,7 @@ export default {
   data() {
     return {
       post: {},
+      dialog: false,
     };
   },
   async created() {
