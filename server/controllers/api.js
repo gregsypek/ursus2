@@ -8,7 +8,22 @@ module.exports = class API {
 	//fetch all posts
 	static async fetchAllPost(req, res) {
 		try {
-			const posts = await Post.find();
+			// let posts = await Post.find();
+			let query = Post.find();
+			//Pagination
+			const page = req.query.page * 1 || 1;
+			const limit = req.query.limit * 1 || 100;
+			const skip = (page - 1) * limit;
+
+			//page =3&limit=10, 1-10 page1, 11-20 page2, 21-30 page3
+			query = query.skip(skip).limit(limit);
+
+			if (req.query.page) {
+				const numPosts = await Post.countDocuments();
+				if (skip >= numPosts) throw new Error("This page does not exist");
+			}
+			const posts = await query;
+
 			res.status(200).json(posts);
 		} catch (err) {
 			res.status(404).json({ message: err.message });
