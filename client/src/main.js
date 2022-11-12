@@ -22,11 +22,7 @@ new Vue({
 			(response) => response,
 			(error) => {
 				console.log(error.response);
-				if (
-					(error.response.status === 401 && this.$route.name === "add-post") ||
-					this.$route.name === "edit-post" ||
-					this.$route.name === "post"
-				) {
+				if (error.response.status === 401 && this.$route.name === "add-post") {
 					// this.$router.push("/");
 					this.$router.push({
 						name: "home",
@@ -38,6 +34,17 @@ new Vue({
 					setTimeout(() => {
 						this.$store.dispatch("logout");
 					}, 5000);
+				}
+				if (
+					(error.response.status === 403 && this.$route.name === "post") ||
+					this.$route.name === "edit-post"
+				) {
+					this.$router.push({
+						name: "home",
+						params: {
+							warning: "You do not have permission to perform this action!",
+						},
+					});
 				}
 				return Promise.reject(error);
 			}

@@ -109,85 +109,85 @@
 
 <script>
 export default {
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: "",
-      errors: null,
-      showPassword: false,
+	data() {
+		return {
+			name: "",
+			email: "",
+			password: "",
+			errors: null,
+			showPassword: false,
 
-      emailRules: [
-        (value) => value.indexOf("@") !== 0 || "Email should have a username.",
-        (value) => value.includes("@") || "Email should include an @ symbol.",
-        (value) =>
-          value.indexOf(".") - value.indexOf("@") > 1 ||
-          "Email should contain a valid domain.",
-        (value) =>
-          value.includes(".") || "Email should include a period symbol.",
-        (value) =>
-          value.indexOf(".") <= value.length - 3 ||
-          "Email should contain a valid domain extension.",
-      ],
-      nameRules: [(value) => !!value || "Name is required"],
-      passwordRules: [
-        (value) => !!value || "Password is required",
-        (value) => value.length > 5 || "Minimum length is 6",
-      ],
-      formValidity: false,
-    };
-  },
-  methods: {
-    register() {
-      this.$store
-        .dispatch("register", {
-          name: this.name,
-          // ma
-          email: this.email,
-          password: this.password,
-        })
-        .then(() => {
-          this.$router.push({
-            name: "home",
-            params: {
-              message: "Congratulations, you've just created your new account",
-            },
-          });
-        })
-        .catch((err) => {
-          this.errors = err.response.data.errors;
-        });
-    },
-    resetValidation() {
-      this.$refs.registerForm.resetValidation();
-    },
-    resetForm() {
-      this.$refs.registerForm.reset();
-    },
-    validateForm() {
-      this.$refs.registerForm.validate();
-    },
-  },
+			emailRules: [
+				(value) => value.indexOf("@") !== 0 || "Email should have a username.",
+				(value) => value.includes("@") || "Email should include an @ symbol.",
+				(value) =>
+					value.indexOf(".") - value.indexOf("@") > 1 ||
+					"Email should contain a valid domain.",
+				(value) =>
+					value.includes(".") || "Email should include a period symbol.",
+				(value) =>
+					value.indexOf(".") <= value.length - 3 ||
+					"Email should contain a valid domain extension.",
+			],
+			nameRules: [(value) => !!value || "Name is required"],
+			passwordRules: [
+				(value) => !!value || "Password is required",
+				(value) => (!!value && value.length > 5) || "Minimum length is 6",
+			],
+			formValidity: false,
+		};
+	},
+	methods: {
+		register() {
+			this.$store
+				.dispatch("register", {
+					name: this.name,
+					// ma
+					email: this.email,
+					password: this.password,
+				})
+				.then(() => {
+					this.$router.push({
+						name: "home",
+						params: {
+							message: "Congratulations, you've just created your new account",
+						},
+					});
+				})
+				.catch((err) => {
+					this.errors = err.response.data.errors;
+				});
+		},
+		resetValidation() {
+			this.$refs.registerForm.resetValidation();
+		},
+		resetForm() {
+			this.$refs.registerForm.reset();
+		},
+		validateForm() {
+			this.$refs.registerForm.validate();
+		},
+	},
 };
 </script>
 
 <style>
 .v-icon {
-  margin-right: 1rem;
+	margin-right: 1rem;
 }
 /* .isRegister a {
   color: var(--color-dark-500);
 } */
 button .btn {
-  color: black;
+	color: black;
 }
 .v-btn:not(.v-btn--outlined).error {
-  color: red;
+	color: red;
 }
 .v-btn:not(.v-btn--outlined).warning {
-  color: orange;
+	color: orange;
 }
 .v-btn:not(.v-btn--outlined).success {
-  color: green;
+	color: green;
 }
 </style>

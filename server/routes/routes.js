@@ -1,4 +1,5 @@
 const express = require("express");
+const { promisify } = require("util");
 const router = express.Router();
 const API = require("../controllers/api");
 const multer = require("multer");
@@ -38,13 +39,42 @@ function verifyToken(req, res, next) {
 		res.sendStatus(401);
 	}
 }
+const restrictTo = (...roles) => {
+	return async (req, res, next) => {
+		const decoded = await promisify(jwt.verify)(req.token, "the_secret_key");
+		// console.log(
+		// 	"🚀 ~ file: routes.js ~ line 46 ~ return ~ decoded",
+		// 	decoded.user
+		// );
+
+		if (!roles.includes(decoded.user.role)) {
+			// console.log(
+			// 	"🚀 ~ file: routes.js ~ line 61 ~ return ~ decoded.user.role",
+			// 	decoded.user.role
+			// );	
+			return res.sendStatus(403);
+		}
+		next();
+	};
+};
 
 router.get("/", API.fetchAllPost);
 router.get("/:id", API.fetchPostByID);
 router.post("/", verifyToken, upload, API.createPost);
 router.post("/register", API.createUser);
 router.post("/login", API.loginUser);
-router.patch("/:id", verifyToken, upload, API.updatePost);
-router.delete("/:id", verifyToken, API.deletePost);
+router.patch(
+	"/:id",
+	verifyToken,
+	restrictTo("admin", "editor"),
+	upload,
+	API.updatePost
+);
+router.delete(
+	"/:id",
+	verifyToken,
+	restrictTo("admin", "editor"),
+	API.deletePost
+);
 
 module.exports = router;

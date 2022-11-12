@@ -59,7 +59,7 @@
 											<v-card-actions>
 												<v-spacer></v-spacer>
 												<v-btn
-													flat
+													text
 													color="green darken-1"
 													text
 													@click="dialog = false"
@@ -67,7 +67,7 @@
 												>
 													Cancel
 												</v-btn>
-												<v-btn color="error" flat @click="removePost(post._id)">
+												<v-btn color="error" text @click="removePost(post._id)">
 													Confirm Delete
 												</v-btn>
 											</v-card-actions>
@@ -105,68 +105,68 @@ import API from "../api";
 import { authComputed } from "../vuex/helpers.js";
 
 export default {
-  data() {
-    return {
-      post: {},
-      dialog: false,
-    };
-  },
-  async created() {
-    const response = await API.getPostByID(this.$route.params.id);
-    this.post = response;
-  },
-  methods: {
-    async removePost(id) {
-      const response = await API.deletePost(id);
-      this.$router.push({
-        name: "home",
-        params: { message: response.message },
-      });
-    },
-  },
-  computed: {
-    ...authComputed,
-  },
+	data() {
+		return {
+			post: {},
+			dialog: false,
+		};
+	},
+	async created() {
+		const response = await API.getPostByID(this.$route.params.id);
+		this.post = response;
+	},
+	methods: {
+		async removePost(id) {
+			const response = await API.deletePost(id);
+			this.$router.push({
+				name: "home",
+				params: { message: response.message },
+			});
+		},
+	},
+	computed: {
+		...authComputed,
+	},
 };
 </script>
 
 <style scoped>
 .thumbnails {
-  background-color: var(--color-light-500);
+	background-color: var(--color-light-500);
 }
 .img-thumbnail {
-  width: 100px;
+	width: 100px;
 }
 aside {
-  position: relative;
+	position: relative;
 }
 aside div {
-  background-color: var(--color-accent);
+	background-color: var(--color-accent);
 }
 aside h3 {
-  position: absolute;
-  letter-spacing: 0;
-  color: var(--color-white);
+	position: absolute;
+	letter-spacing: 0;
+	color: var(--color-white);
 
-  left: 50%;
-  top: 50%;
-  transform: rotate(0) translate(-50%, -50%);
-  width: max-content;
-  margin: 0;
-  padding: 0;
+	left: 50%;
+	top: 50%;
+	transform: rotate(0) translate(-50%, -50%);
+	width: max-content;
+	margin: 0;
+	padding: 0;
 }
 
 .btn-danger,
 .btn-danger:hover {
-  color: var(--color-accent);
+	color: var(--color-accent);
 }
 .btn-outline-secondary:hover {
-  color: var(--color-dark);
-  background-color: var(--color-white);
+	color: var(--color-dark);
+	background-color: var(--color-white);
 }
 @media (min-width: 800px) {
-  .img-thumbnail {
-    width: 200px;
-  }
+	.img-thumbnail {
+		width: 200px;
+	}
 }
 </style>

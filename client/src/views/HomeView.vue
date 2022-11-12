@@ -73,46 +73,46 @@
 import API from "../api.js";
 
 export default {
-  name: "Home",
-  data() {
-    return {
-      isLoading: true,
-      posts: [],
-      pageNumber: 1,
-      size: 4,
-    };
-  },
-  async created() {
-    this.posts = await API.getAllPost();
-    this.isLoading = false;
-  },
-  methods: {
-    handlePageChange(value) {
-      this.pageNumber = value;
-    },
-  },
-  computed: {
-    pageCount() {
-      return Math.ceil(this.posts.length / this.size);
-    },
-    paginatedData() {
-      const start = (this.pageNumber - 1) * this.size;
-      const end = start + this.size;
-      return this.posts.slice(start, end);
-    },
-  },
+	name: "Home",
+	data() {
+		return {
+			isLoading: true,
+			posts: [],
+			pageNumber: 1,
+			size: 4,
+		};
+	},
+	async created() {
+		this.posts = await API.getAllPost();
+		this.isLoading = false;
+	},
+	methods: {
+		handlePageChange(value) {
+			this.pageNumber = value;
+		},
+	},
+	computed: {
+		pageCount() {
+			return Math.ceil(this.posts.length / this.size);
+		},
+		paginatedData() {
+			const start = (this.pageNumber - 1) * this.size;
+			const end = start + this.size;
+			return this.posts.slice(start, end);
+		},
+	},
 };
 </script>
-<style >
-.success {
-  background-color: #4caf50;
-  color: white;
+<style>
+.v-alert.success {
+	background-color: #4caf50;
+	color: white;
 }
-.warning {
-  background-color: #f61b16;
-  color: white;
+.v-alert.warning {
+	background-color: #f61b16;
+	color: white;
 }
 .theme--light.v-pagination .v-pagination__item--active {
-  color: red;
+	color: red;
 }
 </style>
