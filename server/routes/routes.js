@@ -51,7 +51,7 @@ const restrictTo = (...roles) => {
 			// console.log(
 			// 	"🚀 ~ file: routes.js ~ line 61 ~ return ~ decoded.user.role",
 			// 	decoded.user.role
-			// );	
+			// );
 			return res.sendStatus(403);
 		}
 		next();
@@ -60,7 +60,7 @@ const restrictTo = (...roles) => {
 
 router.get("/", API.fetchAllPost);
 router.get("/:id", API.fetchPostByID);
-router.post("/", verifyToken, upload, API.createPost);
+router.post("/", verifyToken, restrictTo("admin"), upload, API.createPost);
 router.post("/register", API.createUser);
 router.post("/login", API.loginUser);
 router.patch(

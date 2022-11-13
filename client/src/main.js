@@ -46,6 +46,15 @@ new Vue({
 						},
 					});
 				}
+				if (error.response.status === 403 && this.$route.name === "add-post") {
+					this.$router.push({
+						name: "home",
+						params: {
+							warning:
+								"You do not have permission to create posts! Log in as admin!",
+						},
+					});
+				}
 				return Promise.reject(error);
 			}
 		);
