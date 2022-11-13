@@ -121,7 +121,7 @@ module.exports = class API {
 					password,
 					// TODO encrypt the password in a live app
 				};
-				const token = jwt.sign({ user }, "the_secret_key");
+				const token = jwt.sign({ user }, process.env.JWT_SECRET);
 
 				console.log("user before create", user);
 				await User.create(user);
@@ -150,7 +150,7 @@ module.exports = class API {
 				return res.status(401).json({ message: "Incorrect email or password" });
 			}
 			if (user.email === email && user.password === password) {
-				const token = jwt.sign({ user }, "the_secret_key");
+				const token = jwt.sign({ user }, process.env.JWT_SECRET);
 				res.json({
 					token,
 					email,

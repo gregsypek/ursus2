@@ -28,7 +28,7 @@ function verifyToken(req, res, next) {
 		req.token = bearerToken;
 
 		// verifies token
-		jwt.verify(req.token, "the_secret_key", (err) => {
+		jwt.verify(req.token, process.env.JWT_SECRET, (err) => {
 			if (err) {
 				return res.sendStatus(401);
 			} else {
@@ -41,7 +41,10 @@ function verifyToken(req, res, next) {
 }
 const restrictTo = (...roles) => {
 	return async (req, res, next) => {
-		const decoded = await promisify(jwt.verify)(req.token, "the_secret_key");
+		const decoded = await promisify(jwt.verify)(
+			req.token,
+			process.env.JWT_SECRET
+		);
 		// console.log(
 		// 	"🚀 ~ file: routes.js ~ line 46 ~ return ~ decoded",
 		// 	decoded.user
