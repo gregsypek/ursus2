@@ -94,12 +94,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ![alt tag](./client/src/assets/screenshots/ursus7.png)
 
-### More info [https://](https://.../about)
+### More info [https://ursusapp.herokuapp.com/about](https://ursusapp.herokuapp.com/about)
 
 ![alt tag](./client/src/assets/screenshots/ursus9.png)
 
 ### Live view
 
-just visit [https://](https://)!
+just visit [https://ursusapp.herokuapp.com/](https://ursusapp.herokuapp.com/)!
 
 Made with [@gregsypek](https://twitter.com/@gregsypek) 2022
