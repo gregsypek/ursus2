@@ -4,11 +4,9 @@
 	"description": "My Full Stack Application",
 	"main": "server/app.js",
 	"scripts": {
-		"client-install": "cd client && npm install",
-		"server-install": "cd server && npm install",
-		"start": "npm run client-install && npm run server-install && concurrently \"npm run server\" \"npm run client\"",
-		"server": "cd server && npm run dev",
-		"client": "cd client && npm run serve"
+		"start": "concurrently \"npm run server\" \"npm run client\"",
+		"client": "cd client && npm run serve",
+		"server": "cd server && npm run dev"
 	},
 	"keywords": [],
 	"author": "Your Name",
@@ -20,9 +18,10 @@
 		"mongoose": "^5.11.15"
 	},
 	"engines": {
-		"node": ">=14.x"
+		"node": "14.x"
 	},
 	"devDependencies": {
+		"@vue/cli-service": "^5.0.8",
 		"nodemon": "^3.0.1"
 	}
 }
