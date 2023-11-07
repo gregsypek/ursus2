@@ -13,6 +13,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"@achrinza/node-ipc": "^10.1.10",
+		"@vue/cli": "^5.0.8",
 		"concurrently": "^8.2.2",
 		"express": "^4.18.2",
 		"mongoose": "^5.11.15"
