@@ -4,6 +4,10 @@
 
 **Ursus** Full Stack App with a login and register option created only for learning purposes and of course for fun. All pictures and information I copied from the original URSUS website link below.
 
+### Live view
+just visit [https://ursus-api.onrender.com/](https://ursus-api.onrender.com/)!
+
+### To see original Ursus website
 [https://www.ursus.com/pl](https://www.ursus.com/pl)
 
 ![alt tag](./client/src/assets/screenshots/ursus1.png)
@@ -94,12 +98,12 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ![alt tag](./client/src/assets/screenshots/ursus7.png)
 
-### More info [https://ursusapp.herokuapp.com/about](https://ursusapp.herokuapp.com/about)
+### More info 
+just visit [https://ursus-api.onrender.com/about](https://ursus-api.onrender.com/about)!
+
 
 ![alt tag](./client/src/assets/screenshots/ursus9.png)
 
-### Live view
 
-just visit [https://ursusapp.herokuapp.com/](https://ursusapp.herokuapp.com/)!
 
 Made with [@gregsypek](https://twitter.com/@gregsypek) 2022
