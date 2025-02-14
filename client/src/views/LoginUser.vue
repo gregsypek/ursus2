@@ -62,6 +62,10 @@
 											<router-link to="/register">
 											Don't have an account? Register.
 											</router-link>
+			      <p class="editor-info">
+													Check the app on editor account as well. Here's an
+													email: editor@gmail.com and password: 123456
+												</p>
                       </div>
 										</v-form>
 									</v-card>
@@ -79,8 +83,8 @@
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      email: "admin@gmail.com",
+      password: "123456",
       error: null,
       showPassword: false,
     };
@@ -117,5 +121,10 @@ export default {
 }
 .errors {
   margin-block: 2rem;
+}
+	.editor-info {
+	font-size: 0.9em;
+	color: #665;
+	margin-top: 15px;
 }
 </style>
